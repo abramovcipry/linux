@@ -585,6 +585,24 @@
 		bias-disable;
 	};
 
+	pinctrl_sdmmc2_default: sdmmc2_default {
+		cmd_data {
+			pinmux = <PIN_PC27__SDMMC2_CMD>,
+				 <PIN_PC29__SDMMC2_DAT0>,
+				 <PIN_PC30__SDMMC2_DAT1>,
+				 <PIN_PC31__SDMMC2_DAT2>,
+				 <PIN_PD0__SDMMC2_DAT3>;
+			slew-rate = <0>;
+			bias-disable;
+		};
+
+		ck {
+			pinmux = <PIN_PC28__SDMMC2_CK>;
+			slew-rate = <0>;
+			bias-disable;
+		};
+	};
+
 	pinctrl_uart6_default: uart6-default {
 		pinmux = <PIN_PD18__FLEXCOM6_IO0>,
 			 <PIN_PD19__FLEXCOM6_IO1>;
@@ -668,6 +686,15 @@
 	cd-gpios = <&pioa PIN_PB29 GPIO_ACTIVE_LOW>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sdmmc1_default &pinctrl_sdmmc1_cd>;
+	status = "okay";
+};
+
+&sdmmc2 {
+	bus-width = <4>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sdmmc2_default>;
+	status = "okay";
+	vmmc-supply = <&vdd_3v3>;
 	status = "okay";
 };
 
